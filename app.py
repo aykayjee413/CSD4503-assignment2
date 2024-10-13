@@ -10,7 +10,7 @@ mock_datat = [
     {"name": "Stardew Valley", "tag": "Stardew Valley Steam key.", "price": 10.00, "image_path": "/static/images/stardew_valley.jpg"},
     {"name": "Elden Ring", "tag": "Elden Ring Steam key.", "price": 50.00, "image_path": "/static/images/elden_ring.jpg"}
              ]
-# products_collection.insert_many(mock_datat)
+products_collection.insert_many(mock_datat)
 
 @app.route("/")
 def index():
