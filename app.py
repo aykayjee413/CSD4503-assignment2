@@ -19,6 +19,6 @@ def index():
 @app.route("/products")
 def products():
     products = list(products_collection.find())
-    return render_template("products.html")
+    return render_template("products.html", products=products)
 
 app.run(host="0.0.0.0", port=5000)
