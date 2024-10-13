@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Totally Legal Products</title>
+</head>
+<body>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Tag</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in products %}
+    <tr>
+      <td><img src="{{product['image_path']}}" class="card-img-top" alt="{{product['name']}}" style="width: 250px; height: 250px"></td>
+      <td>{{product['name']}}</td>
+      <td>{{product['price']}}</td>
+      <td>{{product['tag']}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>
+{% endblock %}
