@@ -6,7 +6,7 @@ load_dotenv()
 app = Flask(__name__)
 MONGODB_USERNAME = os.getenv('MONGODB_USERNAME')
 MONGODB_PASSWORD = os.getenv('MONGODB_PASSWORD')
-mongodb_client = MongoClient(f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.wviyb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongodb_client = MongoClient("mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.wviyb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = mongodb_client["shop_db"]
 products_collection = db["products"]
 mock_datat = [
