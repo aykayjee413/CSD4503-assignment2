@@ -1,5 +1,6 @@
-from flask import Flask, render_template
-from pymongo import MongoClient
+from http import client
+from flask import Flask, request, jsonify, render_template
+from pymongo import MongoClient, collection
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -25,5 +26,26 @@ def index():
 def products():
     products = list(products_collection.find())
     return render_template("products.html", products=products)
+
+@app.route("/ping_db")
+def ping_db():
+    try:
+        # Perform a simple ping to check the connection
+        client.admin.command('ping')
+        return "MongoDB connection is successful!"
+    except Exception as e:
+        return str(e), 500
+
+@app.route("/add_product", methods=["POST"])
+def add_product():
+    product_data = request.get_json()
+    result = collection.insert_one(product_data)
+    if result.acknowledged:
+        return jsonify({"status": "success"}), 201
+    else:
+        return jsonify({"status": "failure"}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 app.run(host="0.0.0.0", port=5000)
