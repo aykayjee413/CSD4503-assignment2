@@ -26,9 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run Tests
         run: |
-          pytest
+          pytest tests/
 
   deploy:
     runs-on: ubuntu-latest
@@ -55,4 +55,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          ssh -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no username@server_ip "your_deploy_commands"
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@216.154.89.130 "cd C:\Users\Laure\PycharmProjects\Assignment2\pythonProject
+            git pull origin main
+            pip install -r requirements.txt
+            flask db upgrade
+            sudo systemctl restart myapp"
